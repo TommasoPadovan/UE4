@@ -17,8 +17,11 @@ private:
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume* pressureVolume;
 
-	UPROPERTY(VisibleAnywhere)
-		float openingAngle;
+	UPROPERTY(EditAnywhere)
+		float openingAngle = 90.f;
+
+	UPROPERTY(EditAnywhere)
+		AActor* actorThatOpens;
 
 public:	
 	// Sets default values for this component's properties
@@ -27,6 +30,8 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	void openDoor();
 
 public:	
 	// Called every frame

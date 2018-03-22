@@ -19,11 +19,10 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
+}
 
-	//FRotator rotation = FRotator(0.0f, 90.0f, 0.0f);
-
-	GetOwner()->SetActorRotation(FRotator(0.0f, 90.0f, 0.0f), ETeleportType::None);
-	
+void UOpenDoor::openDoor() {
+	GetOwner()->SetActorRotation(FRotator(0.0f, 90.0f, 0.0f));
 }
 
 
@@ -31,6 +30,12 @@ void UOpenDoor::BeginPlay()
 void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	//Poll trigger vol every frame
+
+	if ( pressureVolume->IsOverlappingActor(actorThatOpens) ) {
+		openDoor();
+	}
 
 }	
 
