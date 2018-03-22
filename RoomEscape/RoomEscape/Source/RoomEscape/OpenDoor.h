@@ -17,8 +17,8 @@ private:
 	UPROPERTY(EditAnywhere)
 		ATriggerVolume* pressureVolume;
 
-	UPROPERTY(EditAnywhere)
-		float openingAngle = 90.f;
+	UPROPERTY(VisibleAnywhere)
+		float openingAngle = 60.f;
 
 	UPROPERTY(EditAnywhere)
 		AActor* actorThatOpens;
