@@ -24,7 +24,12 @@ void UOpenDoor::BeginPlay()
 }
 
 void UOpenDoor::openDoor() {
-	GetOwner()->SetActorRotation(FRotator(0.0f, openingAngle, 0.0f));
+	owner->SetActorRotation(FRotator(0.0f, openingAngle, 0.0f));
+}
+
+void UOpenDoor::closeDoor()
+{
+	owner->SetActorRotation(FRotator(0.f, 0.f, 0.f));
 }
 
 
@@ -34,9 +39,13 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	//Poll trigger vol every frame
-
 	if ( pressureVolume->IsOverlappingActor(actorThatOpens) ) {
+		lastDoorOpenTime = GetWorld()->GetTimeSeconds();
 		openDoor();
+	}
+
+	if (GetWorld()->GetTimeSeconds() >= lastDoorOpenTime + doorClosingDelay) {
+		closeDoor();
 	}
 
 }	
